@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-# Create your models here.
 from core import managers
 
 
@@ -45,6 +44,9 @@ class State(ModelBase):
     class Meta:
         db_table = 'state'
 
+    def __str__(self):
+        return self.name
+
 
 class City(ModelBase):
     name = models.CharField(
@@ -61,6 +63,9 @@ class City(ModelBase):
     class Meta:
         db_table = 'city'
 
+    def __str__(self):
+        return self.name
+
 
 class Zone(ModelBase):
     name = models.CharField(
@@ -70,6 +75,9 @@ class Zone(ModelBase):
 
     class Meta:
         db_table = 'zone'
+
+    def __str__(self):
+        return self.name
 
 
 class District(ModelBase):
@@ -93,6 +101,9 @@ class District(ModelBase):
     class Meta:
         db_table = 'district'
 
+    def __str__(self):
+        return self.name
+
 
 class Branch(ModelBase):
     name = models.CharField(
@@ -109,6 +120,9 @@ class Branch(ModelBase):
     class Meta:
         db_table = 'branch'
 
+    def __str__(self):
+        return self.name
+
 
 class Supplier(ModelBase):
     name = models.CharField(
@@ -122,6 +136,9 @@ class Supplier(ModelBase):
 
     class Meta:
         db_table = 'supplier'
+
+    def __str__(self):
+        return self.name
 
 
 class ProductGroup(ModelBase):
@@ -142,6 +159,9 @@ class ProductGroup(ModelBase):
 
     class Meta:
         db_table = 'product_group'
+
+    def __str__(self):
+        return self.name
 
 
 class Product(ModelBase):
@@ -175,6 +195,9 @@ class Product(ModelBase):
     class Meta:
         db_table = 'product'
 
+    def __str__(self):
+        return self.name
+
 
 class MaritalStatus(ModelBase):
     name = models.CharField(
@@ -185,6 +208,9 @@ class MaritalStatus(ModelBase):
     class Meta:
         db_table = 'marital_status'
 
+    def __str__(self):
+        return self.name
+
 
 class Department(ModelBase):
     name = models.CharField(
@@ -194,6 +220,9 @@ class Department(ModelBase):
 
     class Meta:
         db_table = 'department'
+
+    def __str__(self):
+        return self.name
 
 
 class Customer(ModelBase):
@@ -229,6 +258,9 @@ class Customer(ModelBase):
 
     class Meta:
         db_table = 'customer'
+
+    def __str__(self):
+        return self.name
 
 
 class Employee(ModelBase):
@@ -273,6 +305,9 @@ class Employee(ModelBase):
 
     class Meta:
         db_table = 'employee'
+
+    def __str__(self):
+        return self.name
 
 
 class Sale(ModelBase):
