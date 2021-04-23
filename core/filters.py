@@ -1,8 +1,12 @@
+from django.db.models import QuerySet, Q
 from django_filters import filterset
 from core import models
 
-
 LIKE = 'icontains'
+
+
+class NumberInFilter(filterset.BaseInFilter, filterset.NumberFilter):
+    pass
 
 
 class StateFilter(filterset.FilterSet):
@@ -71,10 +75,15 @@ class ProductFilter(filterset.FilterSet):
     name = filterset.CharFilter(lookup_expr=LIKE)
     product_group = filterset.CharFilter(field_name='product_group__name', lookup_expr=LIKE)
     supplier = filterset.CharFilter(field_name='supplier__name', lookup_expr=LIKE)
+    product_or_group = filterset.CharFilter(method='filter_product_or_group')
+
+    @staticmethod
+    def filter_product_or_group(queryset: QuerySet, name, value):
+        return queryset.filter(Q(name__icontains=value) | Q(product_group__name__icontains=value))
 
     class Meta:
         model = models.Product
-        fields = ['name', 'product_group', 'supplier']
+        fields = ['name', 'product_group', 'supplier', 'product_or_group']
 
 
 class MaritalStatusFilter(filterset.FilterSet):
@@ -110,10 +119,16 @@ class EmployeeFilter(filterset.FilterSet):
     department = filterset.CharFilter(field_name='department__name', lookup_expr=LIKE)
     district = filterset.CharFilter(field_name='district__name', lookup_expr=LIKE)
     marital_status = filterset.CharFilter(field_name='marital_status__name', lookup_expr=LIKE)
+    start_salary = filterset.NumberFilter(field_name='salary', lookup_expr='gte')
+    end_salary = filterset.NumberFilter(field_name='salary', lookup_expr='lte')
+    salary_in = NumberInFilter(field_name='salary', lookup_expr='in')
 
     class Meta:
         model = models.Employee
-        fields = ['name', 'gender', 'department', 'district', 'marital_status']
+        fields = [
+            'name', 'gender', 'department', 'district',
+            'marital_status', 'start_salary', 'end_salary', 'salary_in'
+        ]
 
 
 class SaleFilter(filterset.FilterSet):

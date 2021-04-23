@@ -27,6 +27,7 @@ class StateViewSet(viewsets.ModelViewSet):
     ordering_fields = '__all__'
     ordering = ('id',)
 
+
 class CityViewSet(ViewSetBase):
     queryset = models.City.objects.all()
     serializer_class = serializers.CitySerializer
@@ -49,6 +50,7 @@ class SupplierViewSet(viewsets.ModelViewSet):
     filter_class = filters.SupplierFilter
     ordering_fields = '__all__'
     ordering = ('id',)
+
 
 class ProductGroupViewSet(viewsets.ModelViewSet):
     queryset = models.ProductGroup.objects.all()
